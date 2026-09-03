@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كل شيء</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    color:#222;
+}
+
+.dark{
+    background:#111827;
+    color:#fff;
+}
+
+.dark header{
+    background:#0b1120;
+}
+
+.dark .card{
+    background:#1f2937;
+    color:#fff;
+}
+
+.dark .products{
+    color:#fff;
+}
+
+header{
+    background:#111;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 15px;
+}
+
+nav button{
+    border:0;
+    padding:10px 15px;
+    margin:4px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.hero{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h2{
+    font-size:35px;
+}
+
+.products{
+    max-width:1100px;
+    margin:30px auto;
+    padding:15px;
+}
+
+.products h2{
+    text-align:center;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 12px #0002;
+}
+
+.image{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+    margin:10px;
+}
+
+.card button{
+    background:#111;
+    color:white;
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+}
+
+@media(max-width:600px){
+    .hero h2{
+        font-size:28px;
+    }
+}
+</style>
+
+<style>
+/* ===== تصميم تسجيل الدخول ===== */
+
+#loginModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.78);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    z-index:999999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.loginBox{
+    position:relative;
+    width:100%;
+    max-width:390px;
+    background:linear-gradient(180deg,#ffffff,#f8fafc);
+    color:#111827;
+    border-radius:28px;
+    padding:32px 25px 25px;
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
+    text-align:center;
+    animation:loginPop .35s ease;
+}
+
+@keyframes loginPop{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.loginClose{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:36px;
+    height:36px;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:#f1f5f9;
+    color:#475569;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.loginIcon{
+    width:72px;
+    height:72px;
+    margin:0 auto 16px;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 10px 25px rgba(37,99,235,.3);
+}
+
+.loginBox h2{
+    margin:0;
+    font-size:27px;
+}
+
+.loginSubtitle{
+    margin:8px 0 24px;
+    color:#64748b;
+    font-size:14px;
+}
+
+.loginField{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#f1f5f9;
+    border:2px solid transparent;
+    border-radius:14px;
+    padding:0 14px;
+    margin:12px 0;
+    transition:.2s;
+}
+
+.loginField:focus-within{
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+
+.loginField span{
+    font-size:19px;
+}
+
+.loginField input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    padding:14px 4px;
+    font-size:15px;
+    color:#111827;
+    direction:rtl;
+}
+
+.loginSubmit{
+    width:100%;
+    border:0;
+    border-radius:14px;
+    padding:15px;
+    margin-top:10px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+    transition:.2s;
+}
+
+.loginSubmit:active{
+    transform:scale(.98);
+}
+
+.loginMessage{
+    min-height:22px;
+    margin:12px 0 0;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.loginLine{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid #e2e8f0;
+    color:#64748b;
+    font-size:12px;
+}
+</style>
+
+
+<style>
+.accountModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.78);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    z-index:999999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.signupBox{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    background:linear-gradient(180deg,#ffffff,#f8fafc);
+    color:#111827;
+    border-radius:28px;
+    padding:32px 25px 25px;
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
+    text-align:center;
+    animation:loginPop .35s ease;
+}
+
+.signupBox h2{
+    margin:8px 0;
+}
+
+</style>
+
+<style>
+.mainHeader{
+    background:#111;
+    color:white;
+    padding:14px 22px 10px;
+}
+
+.headerTop{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.accountButtons{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    direction:ltr;
+}
+
+.accountButtons button{
+    border:0;
+    padding:9px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.loginBtn{
+    background:transparent;
+    color:white;
+    border:1px solid #555 !important;
+}
+
+.signupBtn{
+    background:white;
+    color:#111;
+}
+
+.mainNav{
+    max-width:1200px;
+    margin:12px auto 0;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.mainNav button{
+    border:0;
+    padding:9px 14px;
+    margin:0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    .headerTop{
+        flex-direction:column;
+    }
+
+    .accountButtons{
+        width:100%;
+        justify-content:flex-end;
+    }
+
+    .mainNav{
+        justify-content:center;
+    }
+}
+</style>
+
+<style>
+.menuArea{
+    position:relative;
+    direction:ltr;
+}
+
+.menuBtn{
+    width:44px;
+    height:40px;
+    border:0;
+    border-radius:10px;
+    background:#222;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.menuBtn:hover{
+    background:#333;
+}
+
+.sideMenu{
+    display:none;
+    position:absolute;
+    left:0;
+    top:48px;
+    width:210px;
+    background:white;
+    border-radius:14px;
+    padding:8px;
+    box-shadow:0 10px 30px #0004;
+    z-index:99999;
+}
+
+.sideMenu.show{
+    display:block;
+}
+
+.sideMenu button{
+    display:block;
+    width:100%;
+    border:0;
+    background:white;
+    color:#222;
+    text-align:right;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.sideMenu button:hover{
+    background:#f1f1f1;
+}
+
+.dark .sideMenu{
+    background:#1f2937;
+}
+
+.dark .sideMenu button{
+    background:#1f2937;
+    color:white;
+}
+
+.dark .sideMenu button:hover{
+    background:#374151;
+}
+</style>
+
+<style>
+.mainHeader{
+    background:#111;
+    color:white;
+    padding:18px 20px 14px;
+    position:relative;
+}
+
+.siteName{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.headerActions{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    direction:rtl;
+}
+
+.accountButtons{
+    display:flex;
+    gap:8px;
+    direction:ltr;
+}
+
+.accountButtons button{
+    border:0;
+    padding:9px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.loginBtn{
+    background:transparent;
+    color:white;
+    border:1px solid #555 !important;
+}
+
+.signupBtn{
+    background:white;
+    color:#111;
+}
+
+.menuArea{
+    position:relative;
+    direction:ltr;
+}
+
+.menuBtn{
+    width:44px;
+    height:40px;
+    border:0;
+    border-radius:10px;
+    background:#222;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.sideMenu{
+    display:none;
+    position:absolute;
+    left:0;
+    top:48px;
+    width:210px;
+    background:white;
+    border-radius:14px;
+    padding:8px;
+    box-shadow:0 10px 30px #0004;
+    z-index:99999;
+}
+
+.sideMenu.show{
+    display:block;
+}
+
+.sideMenu button{
+    display:block;
+    width:100%;
+    border:0;
+    background:white;
+    color:#222;
+    text-align:right;
+    padding:12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.sideMenu button:hover{
+    background:#f1f1f1;
+}
+
+.dark .sideMenu{
+    background:#1f2937;
+}
+
+.dark .sideMenu button{
+    background:#1f2937;
+    color:white;
+}
+
+.dark .sideMenu button:hover{
+    background:#374151;
+}
+
+@media(max-width:600px){
+    .siteName{
+        font-size:26px;
+    }
+
+    .accountButtons button{
+        padding:8px 13px;
+    }
+}
+</style>
+
+<style>
+.mobileBottomNav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:68px;
+    background:rgba(17,17,17,.97);
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    z-index:999998;
+    box-shadow:0 -5px 20px #0003;
+    padding:5px 4px;
+    direction:rtl;
+}
+
+.mobileBottomNav button{
+    flex:1;
+    height:58px;
+    border:0;
+    background:transparent;
+    color:white;
+    border-radius:12px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+}
+
+.mobileBottomNav button:hover{
+    background:#292929;
+}
+
+.mobileBottomNav span{
+    font-size:21px;
+    line-height:22px;
+}
+
+.mobileBottomNav small{
+    font-size:10px;
+}
+
+body{
+    padding-bottom:75px;
+}
+
+@media(min-width:700px){
+    .mobileBottomNav{
+        max-width:650px;
+        left:50%;
+        right:auto;
+        transform:translateX(-50%);
+        border-radius:18px 18px 0 0;
+    }
+}
+</style>
+
+<style>
+.searchBox{
+    max-width:650px;
+    margin:25px auto 10px;
+    padding:0 15px;
+    position:relative;
+}
+
+.searchBox span{
+    position:absolute;
+    right:32px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:20px;
+    pointer-events:none;
+}
+
+.searchBox input{
+    width:100%;
+    height:52px;
+    border:2px solid #ddd;
+    border-radius:16px;
+    padding:0 48px 0 18px;
+    font-size:16px;
+    outline:none;
+    background:white;
+    color:#111;
+    box-shadow:0 5px 20px #0001;
+}
+
+.searchBox input:focus{
+    border-color:#111;
+    box-shadow:0 5px 25px #0002;
+}
+
+.dark .searchBox input{
+    background:#1f2937;
+    color:white;
+    border-color:#374151;
+}
+
+@media(max-width:600px){
+    .searchBox{
+        margin-top:18px;
+    }
+
+    .searchBox input{
+        height:50px;
+        border-radius:14px;
+    }
+}
+</style>
+
+<style>
+#moreMenu{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:1000000;
+}
+
+#moreMenu.showMore{
+    display:flex;
+}
+
+.moreMenuBox{
+    width:min(360px,50vw);
+    min-width:280px;
+    max-height:80vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:25px 25px 0 0;
+    padding:22px 16px 90px;
+    position:relative;
+    text-align:center;
+    box-sizing:border-box;
+}
+
+.dark .moreMenuBox{
+    background:#181818;
+    color:white;
+}
+
+.closeMore{
+    position:absolute;
+    left:15px;
+    top:15px;
+    border:0;
+    background:#eee;
+    border-radius:50%;
+    width:38px;
+    height:38px;
+    font-size:18px;
+}
+
+.moreMenuBox h2{
+    margin:5px 0 25px;
+}
+
+.socialTitle{
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid #ddd;
+    font-weight:bold;
+}
+
+.socialLinks{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    margin-top:15px;
+}
+
+.socialLinks a{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:13px 16px;
+    border-radius:14px;
+    background:#f3f3f3;
+    color:inherit;
+    text-decoration:none;
+}
+
+.dark .socialLinks a{
+    background:#292929;
+}
+
+.socialLinks b{
+    font-size:15px;
+}
+
+.socialLinks span{
+    direction:ltr;
+    opacity:.75;
+    font-size:13px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="mainHeader">
+
+    <div class="siteName">🛍️ كل شيء</div>
+
+    <div class="headerActions">
+
+        <div class="accountButtons">
+            <button class="loginBtn" onclick="openLogin()">Login</button>
+            <button class="signupBtn" onclick="openSignup()">Sign Up</button>
+        </div>
+
+        <div class="menuArea">
+            <button class="menuBtn" onclick="toggleMenu()">☰</button>
+
+            <div id="sideMenu" class="sideMenu">
+                <button onclick="support()">💬 الدعم</button>
+                <button onclick="alert('شكرًا لتقييم منتجنا ⭐')">⭐ قيّم منتجنا</button>
+                <button onclick="alert('شكرًا لتقييم موقعنا ⭐')">⭐ قيّم موقعنا</button>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<section class="hero" id="home">
+<h2>أهلاً بك في كل شيء 👋</h2>
+<p>أفضل المنتجات بأسعار مناسبة</p>
+</section>
+
+
+<div class="searchBox">
+    <span>🔎</span>
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="ابحث عن منتج..."
+        oninput="searchProducts()"
+    >
+</div>
+\n<section class="products" id="products">
+
+<h2>🔥 المنتجات</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="image">📱</div>
+<h3>هاتف ذكي</h3>
+<p>هاتف حديث ورائع</p>
+<div class="price">$499</div>
+<button onclick="add('هاتف ذكي',499)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<div class="image">💻</div>
+<h3>حاسوب محمول</h3>
+<p>حاسوب سريع وقوي</p>
+<div class="price">$899</div>
+<button onclick="add('حاسوب محمول',899)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<div class="image">🎧</div>
+<h3>سماعات</h3>
+<p>صوت عالي الجودة</p>
+<div class="price">$79</div>
+<button onclick="add('سماعات',79)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<div class="image">⌚</div>
+<h3>ساعة ذكية</h3>
+<p>ساعة عصرية وأنيقة</p>
+<div class="price">$129</div>
+<button onclick="add('ساعة ذكية',129)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<div class="image">🎮</div>
+<h3>جهاز ألعاب</h3>
+<p>متعة لا تنتهي</p>
+<div class="price">$399</div>
+<button onclick="add('جهاز ألعاب',399)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<div class="image">🖱️</div>
+<h3>ماوس</h3>
+<p>ماوس سريع للألعاب</p>
+<div class="price">$30</div>
+<button onclick="add('ماوس',30)">أضف للسلة</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+© 2026 كل شيء - جميع الحقوق محفوظة
+</footer>
+
+<script>
+function toggleDark(){
+    document.body.classList.toggle("dark");
+    localStorage.setItem("dark",document.body.classList.contains("dark"));
+}
+
+if(localStorage.getItem("dark")==="true"){
+    document.body.classList.add("dark");
+}
+
+function support(){
+    alert("مرحباً بك في فريق الدعم 💬\n\nيمكنك التواصل معنا وسنساعدك بأسرع وقت.");
+}
+
+</script>
+
+
+<div id="supportBox" style="display:none;position:fixed;inset:0;background:#0008;z-index:999;align-items:center;justify-content:center;padding:20px">
+<div style="background:white;color:#111;padding:25px;border-radius:18px;width:min(380px,100%);text-align:center">
+<h2>💬 تواصل مع فريق الدعم</h2>
+<p style="margin:15px 0">اختر طريقة التواصل المناسبة لك:</p>
+
+<a href="https://wa.me/963984327926" target="_blank"
+style="display:block;background:#25D366;color:white;text-decoration:none;padding:14px;border-radius:10px;margin:10px 0">
+💬 تواصل عبر WhatsApp
+</a>
+
+<a href="mailto:almqs79@gmail.com"
+style="display:block;background:#111;color:white;text-decoration:none;padding:14px;border-radius:10px;margin:10px 0">
+📧 تواصل عبر Email
+</a>
+
+<button onclick="closeSupport()" style="padding:12px 25px;border:0;border-radius:10px;margin-top:5px">
+إغلاق
+</button>
+</div>
+</div>
+
+<script>
+function support(){
+document.getElementById("supportBox").style.display="flex";
+}
+function closeSupport(){
+document.getElementById("supportBox").style.display="none";
+}
+</script>
+
+
+
+<div id="signupModal" class="accountModal">
+    <div class="signupBox">
+
+        <button class="loginClose" onclick="closeSignup()">✕</button>
+
+        <div class="loginIcon">📝</div>
+
+        <h2>إنشاء حساب جديد 👋</h2>
+        <p class="loginSubtitle">أنشئ حسابك وابدأ التسوق</p>
+
+        <div class="loginField">
+            <span>👤</span>
+            <input id="signupUsername" type="text" placeholder="اسم المستخدم">
+        </div>
+
+        <div class="loginField">
+            <span>📧</span>
+            <input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
+        </div>
+
+        <div class="loginField">
+            <span>🔑</span>
+            <input id="signupPassword" type="password" placeholder="كلمة المرور">
+        </div>
+
+        <div class="loginField">
+            <span>🔒</span>
+            <input id="signupConfirm" type="password" placeholder="تأكيد كلمة المرور">
+        </div>
+
+        <button class="loginSubmit" onclick="signup()">
+            إنشاء الحساب
+        </button>
+
+        <p id="signupMessage" class="loginMessage"></p>
+
+        <div class="loginLine">
+            <span>حسابك محفوظ على هذا الجهاز 💾</span>
+        </div>
+
+    </div>
+</div>
+
+<div id="loginModal">
+    <div class="loginBox">
+
+        <button class="loginClose" onclick="closeLogin()">✕</button>
+
+        <div class="loginIcon">🔐</div>
+
+        <h2>أهلًا بك 👋</h2>
+        <p class="loginSubtitle">سجّل دخولك للمتابعة إلى حسابك</p>
+
+        <div class="loginField">
+            <span>📧</span>
+            <input id="loginEmail" type="email" placeholder="البريد الإلكتروني">
+        </div>
+
+        <div class="loginField">
+            <span>🔑</span>
+            <input id="loginPassword" type="password" placeholder="كلمة المرور">
+        </div>
+
+        <button class="loginSubmit" onclick="login()">
+            تسجيل الدخول
+        </button>
+
+        <p id="loginMessage" class="loginMessage"></p>
+
+        <div class="loginLine">
+            <span>تسجيل دخول آمن وسريع 🔒</span>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function openSignup(){
+    document.getElementById("signupModal").style.display="flex";
+}
+
+function closeSignup(){
+    document.getElementById("signupModal").style.display="none";
+}
+
+function signup(){
+    const username=document.getElementById("signupUsername").value.trim();
+    const email=document.getElementById("signupEmail").value.trim();
+    const password=document.getElementById("signupPassword").value;
+    const confirm=document.getElementById("signupConfirm").value;
+    const message=document.getElementById("signupMessage");
+
+    if(!username || !email || !password || !confirm){
+        message.textContent="يرجى تعبئة جميع الحقول ⚠️";
+        return;
+    }
+
+    if(password !== confirm){
+        message.textContent="كلمتا المرور غير متطابقتين ❌";
+        return;
+    }
+
+    if(password.length < 6){
+        message.textContent="كلمة المرور يجب أن تكون 6 أحرف على الأقل ⚠️";
+        return;
+    }
+
+    const users=JSON.parse(localStorage.getItem("users") || "[]");
+
+    if(users.some(user => user.email === email)){
+        message.textContent="هذا البريد مسجل مسبقًا ❌";
+        return;
+    }
+
+    users.push({
+        username:username,
+        email:email,
+        password:password
+    });
+
+    localStorage.setItem("users",JSON.stringify(users));
+
+    message.textContent="تم إنشاء الحساب بنجاح ✅";
+
+    setTimeout(function(){
+        closeSignup();
+        document.getElementById("loginEmail").value=email;
+        openLogin();
+    },1000);
+}
+
+</script>
+<script>
+function openLogin(){
+  document.getElementById("loginModal").style.display="flex";
+}
+
+function closeLogin(){
+  document.getElementById("loginModal").style.display="none";
+}
+
+function login(){
+  const email=document.getElementById("loginEmail").value.trim();
+  const password=document.getElementById("loginPassword").value;
+  const message=document.getElementById("loginMessage");
+
+  if(!email){
+    message.textContent="اكتب البريد الإلكتروني أولاً";
+    return;
+  }
+
+  const users=JSON.parse(localStorage.getItem("users") || "[]");
+  const user=users.find(u => u.email === email);
+
+  if(!user){
+    message.textContent="الحساب غير موجود ❌";
+    return;
+  }
+
+  if(user.password !== password){
+    message.textContent="كلمة المرور غير صحيحة ❌";
+    return;
+  }
+
+  localStorage.setItem("loggedIn","true");
+  localStorage.setItem("userEmail",email);
+  localStorage.setItem("username",user.username);
+  message.textContent="تم تسجيل الدخول بنجاح ✅";
+}
+</script>
+<script>
+
+        document.getElementById("loginMessage").textContent=
+            "يجب تسجيل الدخول لإتمام الشراء 🔐";
+        return;
+    }
+
+    alert("تم تأكيد طلبك بنجاح ✅");
+}
+</script>
+<style>
+/* ===== السلة الاحترافية ===== */
+
+#cartModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(5px);
+    z-index:99999;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+#cartModal.show{
+    display:flex;
+}
+
+.cartBox{
+    width:100%;
+    max-width:520px;
+    max-height:88vh;
+    overflow:auto;
+    background:#fff;
+    color:#111827;
+    border-radius:24px;
+    padding:22px;
+    box-shadow:0 20px 70px rgba(0,0,0,.35);
+    animation:cartOpen .25s ease;
+}
+
+@keyframes cartOpen{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.cartHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.cartHeader h2{
+    margin:0;
+    font-size:23px;
+}
+
+.cartClose{
+    width:38px !important;
+    height:38px;
+    padding:0 !important;
+    border:0;
+    border-radius:50%;
+    background:#f3f4f6;
+    color:#111827;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.cartItem{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #f0f0f0;
+}
+
+.cartImage{
+    width:65px;
+    height:65px;
+    border-radius:15px;
+    background:#f3f4f6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    flex-shrink:0;
+}
+
+.cartInfo{
+    flex:1;
+}
+
+.cartName{
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.cartPrice{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.cartControls{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.qtyBtn{
+    width:32px !important;
+    height:32px;
+    padding:0 !important;
+    padding:14px 18px;
+    border-radius:14px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
+    z-index:100000;
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:.3s;
+    font-size:15px;
+}
+
+#cartToast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+#successToast{
+    position:fixed;
+    top:25px;
+    right:20px;
+    left:20px;
+    margin:auto;
+    max-width:380px;
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:white;
+    padding:16px 20px;
+    border-radius:16px;
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    justify-content:center;
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-25px) scale(.96);
+    transition:all .3s ease;
+}
+
+#successToast.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+}
+
+#successToast .toastIcon{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:rgba(255,255,255,.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    flex-shrink:0;
+}
+
+</style>
+
+
+<!-- نافذة السلة -->
+<div id="cartModal">
+
+    <div class="cartBox">
+
+        <div class="cartHeader">
+            <h2>🛒 سلة المشتريات</h2>
+
+            <button class="cartClose" onclick="closeCart()">
+                ✕
+            </button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div id="cartSummary"></div>
+
+    </div>
+
+</div>
+
+
+<!-- إشعار صغير -->
+
+
+
+<script>
+
+/* ===== بيانات السلة ===== */
+
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+
+/* ===== إضافة منتج ===== */
+
+function add(name, price){
+
+    const existing = cart.find(item => item.name === name);
+
+    if(existing){
+        existing.quantity++;
+    }else{
+        cart.push({
+            name:name,
+            price:Number(price),
+            quantity:1
+        });
+    }
+
+    saveCart();
+
+    showSuccessToast(name);
+}
+
+
+/* ===== حفظ السلة ===== */
+
+function saveCart(){
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+
+/* ===== فتح السلة ===== */
+
+function openCart(){
+
+    document.getElementById("cartModal").classList.add("show");
+
+    renderCart();
+
+}
+
+
+/* ===== إغلاق السلة ===== */
+
+function closeCart(){
+
+    document.getElementById("cartModal").classList.remove("show");
+
+}
+
+
+/* ===== عرض السلة ===== */
+
+function renderCart(){
+
+    const box = document.getElementById("cartItems");
+    const summary = document.getElementById("cartSummary");
+
+    if(cart.length === 0){
+
+        box.innerHTML = `
+            <div class="emptyCart">
+                <div class="emptyCartIcon">🛒</div>
+                <h3>السلة فارغة</h3>
+                <p>أضف بعض المنتجات الرائعة إلى سلتك ✨</p>
+            </div>
+        `;
+
+        summary.innerHTML = "";
+
+        return;
+    }
+
+
+    let html = "";
+    let total = 0;
+
+
+    cart.forEach((item,index)=>{
+
+        const quantity = item.quantity || 1;
+
+        const itemTotal = Number(item.price) * quantity;
+
+        total += itemTotal;
+
+
+        let icon = "📦";
+
+        if(item.name.includes("هاتف")) icon = "📱";
+        if(item.name.includes("حاسوب")) icon = "💻";
+        if(item.name.includes("سماعات")) icon = "🎧";
+        if(item.name.includes("ساعة")) icon = "⌚";
+        if(item.name.includes("ألعاب")) icon = "🎮";
+        if(item.name.includes("ماوس")) icon = "🖱️";
+
+
+        html += `
+            <div class="cartItem">
+
+                <div class="cartImage">
+                    ${icon}
+                </div>
+
+                <div class="cartInfo">
+
+                    <div class="cartName">
+                        ${item.name}
+                    </div>
+
+                    <div class="cartPrice">
+                        $${item.price}
+                    </div>
+
+                </div>
+
+                <div class="cartControls">
+
+                    <button
+                        class="qtyBtn"
+                        onclick="changeQuantity(${index},1)">
+                        +
+                    </button>
+
+                    <span class="qty">
+                        ${quantity}
+                    </span>
+
+                    <button
+                        class="qtyBtn"
+                        onclick="changeQuantity(${index},-1)">
+                        −
+                    </button>
+
+                    <button
+                        class="deleteBtn"
+                        onclick="removeItem(${index})">
+                        🗑️
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+    });
+
+
+    box.innerHTML = html;
+
+
+    summary.innerHTML = `
+        <div class="cartSummary">
+
+            <div class="cartSummaryRow">
+                <span>المجموع</span>
+
+                <span class="cartTotal">
+                    $${total}
+                </span>
+            </div>
+
+            <button
+                class="checkoutBtn"
+                onclick="checkout()">
+                💳 إتمام الشراء
+            </button>
+
+            <button
+                class="clearBtn"
+                onclick="clearCart()">
+                🗑️ تفريغ السلة
+            </button>
+
+        </div>
+    `;
+
+}
+
+
+/* ===== تغيير الكمية ===== */
+
+function changeQuantity(index,amount){
+
+    cart[index].quantity = (cart[index].quantity || 1) + amount;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart();
+
+    renderCart();
+
+}
+
+
+/* ===== حذف منتج ===== */
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+
+    renderCart();
+
+    showToast("تم حذف المنتج 🗑️");
+
+}
+
+
+/* ===== تفريغ السلة ===== */
+
+function clearCart(){
+
+    cart = [];
+
+    saveCart();
+
+    renderCart();
+
+    showToast("تم تفريغ السلة 🛒");
+
+}
+
+
+
+
+
+/* ===== الشراء ===== */
+
+function checkout(){
+
+    if(localStorage.getItem("loggedIn") !== "true"){
+
+        closeCart();
+
+        openLogin();
+
+        const message = document.getElementById("loginMessage");
+
+        if(message){
+
+            message.textContent =
+                "يجب تسجيل الدخول لإتمام الشراء 🔐";
+
+        }
+
+        return;
+    }
+
+
+    alert("تم تأكيد الطلب بنجاح ✅");
+
+}
+
+
+/* ===== إغلاق عند الضغط خارج السلة ===== */
+
+document.getElementById("cartModal").addEventListener("click",function(e){
+
+    if(e.target === this){
+
+        closeCart();
+
+    }
+
+});
+
+
+</script>
+
+<div id="successToast">
+    <span class="toastIcon">✓</span>
+    <span id="successToastText">تمت الإضافة إلى السلة بنجاح 🛒</span>
+</div>
+
+
+<script>
+function showSuccessToast(name){
+    const toast = document.getElementById("successToast");
+    const text = document.getElementById("successToastText");
+
+    text.textContent = "تمت إضافة " + name + " إلى السلة بنجاح 🛒";
+
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(function(){
+        toast.classList.remove("show");
+    }, 2500);
+}
+</script>
+
+
+<script>
+function toggleMenu(){
+    document.getElementById("sideMenu").classList.toggle("show");
+}
+</script>
+
+<div class="mobileBottomNav">
+
+    <button onclick="location.href='#home'">
+        <span>🏠</span>
+        <small>الرئيسية</small>
+    </button>
+
+    <button onclick="focusSearch()">
+        <span>🔎</span>
+        <small>البحث</small>
+    </button>
+
+    <button onclick="location.href='#products'">
+        <span>🛍️</span>
+        <small>المنتجات</small>
+    </button>
+
+    <button onclick="openCart()">
+        <span>🛒</span>
+        <small>السلة</small>
+    </button>
+
+    <button onclick="openMoreMenu()">
+        <span>☰</span>
+        <small>المزيد</small>
+    </button>
+
+</div>
+
+<script>
+function focusSearch(){
+    const search=document.getElementById("searchInput");
+
+    if(search){
+        search.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+        search.focus();
+    }else{
+        alert("البحث رح نضيفه بالخطوة الجاية 🔎");
+    }
+}
+</script>
+
+<script>
+function searchProducts(){
+    const input=document.getElementById("searchInput");
+    const cards=document.querySelectorAll(".products .card");
+
+    if(!input) return;
+
+    const query=input.value.trim().toLowerCase();
+
+    cards.forEach(function(card){
+        const text=card.textContent.toLowerCase();
+
+        if(text.includes(query)){
+            card.style.display="";
+        }else{
+            card.style.display="none";
+        }
+    });
+}
+</script>
+
+<script>
+function openMoreMenu(){
+    let menu = document.getElementById("moreMenu");
+
+    if(!menu){
+        menu = document.createElement("div");
+        menu.id = "moreMenu";
+        menu.innerHTML = `
+            <div class="moreMenuBox">
+                <button class="closeMore" onclick="closeMoreMenu()">✕</button>
+
+                <h2>المزيد</h2>
+
+                <div class="socialTitle">
+                    لا تنسى متابعتنا على مواقع التواصل الاجتماعي ❤️
+                </div>
+
+                <div class="socialLinks">
+
+                    <a href="https://www.instagram.com/m._.o.16" target="_blank" rel="noopener">
+                        <b>Instagram</b>
+                    </a>
+
+                    <a href="https://t.me/Abo7oday" target="_blank" rel="noopener">
+                        <b>Telegram</b>
+                    </a>
+
+                    <a href="https://x.com/Mohamad_h_rjab" target="_blank" rel="noopener">
+                        <b>X</b>
+                    </a>
+
+                    <a href="https://www.threads.com/@m._.o.16" target="_blank" rel="noopener">
+                        <b>Threads</b>
+                    </a>
+
+                    <a href="https://www.snapchat.com/add/mohamad_rjab123" target="_blank" rel="noopener">
+                        <b>Snapchat</b>
+                    </a>
+
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(menu);
+    }
+
+    menu.classList.add("showMore");
+}
+
+function closeMoreMenu(){
+    const menu = document.getElementById("moreMenu");
+    if(menu) menu.classList.remove("showMore");
+}
+</script>
+
+<style>
+.socialSection{
+    margin:25px 10px 10px;
+    padding:20px 12px;
+    border-top:1px solid #ddd;
+    text-align:center;
+}
+
+.socialSection h3{
+    margin:0 0 16px;
+    font-size:17px;
+}
+
+.socialLinks{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.socialLinks a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:12px;
+    border-radius:14px;
+    text-decoration:none;
+    color:inherit;
+    background:#f5f5f5;
+    font-weight:600;
+}
+
+.socialIcon{
+    font-size:14px;
+    font-weight:800;
+}
+
+.instagramIcon{color:#d62976}
+.telegramIcon{color:#229ED9}
+.xIcon{color:#000}
+.threadsIcon{color:#000}
+.snapchatIcon{color:#000}
+</style>
+
+<div id="socialSection" class="socialSection">
+    <h3>لا تنسى متابعتنا على مواقع التواصل الاجتماعي ❤️</h3>
+
+    <div class="socialLinks">
+
+        <a href="https://www.instagram.com/m._.o.16" target="_blank" rel="noopener">
+            <span class="socialIcon instagramIcon">Instagram</span>
+            <span>@m._.o.16</span>
+        </a>
+
+        <a href="https://t.me/Abo7oday" target="_blank" rel="noopener">
+            <span class="socialIcon telegramIcon">Telegram</span>
+            <span>@Abo7oday</span>
+        </a>
+
+        <a href="https://x.com/Mohamad_h_rjab" target="_blank" rel="noopener">
+            <span class="socialIcon xIcon">X</span>
+            <span>@Mohamad_h_rjab</span>
+        </a>
+
+        <a href="https://www.threads.com/@m._.o.16" target="_blank" rel="noopener">
+            <span class="socialIcon threadsIcon">Threads</span>
+            <span>@m._.o.16</span>
+        </a>
+
+        <a href="https://www.snapchat.com/add/mohamad_rjab123" target="_blank" rel="noopener">
+            <span class="socialIcon snapchatIcon">Snapchat</span>
+            <span>@mohamad_rjab123</span>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
