@@ -779,6 +779,114 @@ body{
 }
 </style>
 
+
+<style>
+#accountInfoModal{
+    position:fixed;
+    inset:0;
+    z-index:1000001;
+    background:rgba(0,0,0,.65);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    direction:rtl;
+}
+
+.accountCard{
+    width:min(390px,92vw);
+    background:#fff;
+    border-radius:26px;
+    padding:28px 22px 22px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+    text-align:right;
+}
+
+.accountClose{
+    position:absolute;
+    left:15px;
+    top:15px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:#f1f1f1;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.accountAvatar{
+    width:72px;
+    height:72px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+}
+
+.accountCard h2{
+    text-align:center;
+    margin:5px 0;
+}
+
+.accountSub{
+    text-align:center;
+    color:#888;
+    margin:0 0 22px;
+}
+
+.accountRow{
+    background:#f7f8fc;
+    border-radius:16px;
+    padding:14px;
+    margin-top:12px;
+}
+
+.accountRow span{
+    display:block;
+    color:#777;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.accountRow strong{
+    display:block;
+    color:#222;
+    font-size:16px;
+}
+
+.passwordBox{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    direction:ltr;
+}
+
+.passwordBox input{
+    flex:1;
+    min-width:0;
+    border:0;
+    outline:0;
+    background:#fff;
+    border-radius:10px;
+    padding:10px;
+    font-size:16px;
+}
+
+.passwordBox button{
+    width:44px;
+    height:42px;
+    border:0;
+    border-radius:10px;
+    background:#e9e9ee;
+    font-size:20px;
+    cursor:pointer;
+}
+</style>
 </head>
 
 <body>
@@ -1869,20 +1977,50 @@ function openAccountInfo(){
 
     const modal=document.createElement("div");
     modal.id="accountInfoModal";
-    modal.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:1000001;";
+    modal.innerHTML=`
+      <div class="accountCard">
+        <button class="accountClose" onclick="document.getElementById('accountInfoModal').remove()">×</button>
 
-    modal.innerHTML=
-        '<div style="width:min(360px,90vw);background:white;border-radius:22px;padding:24px;text-align:right;direction:rtl;">'+
-        '<button onclick="document.getElementById(\'accountInfoModal\').remove()" style="float:left;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:18px;">✕</button>'+
-        '<h2 style="text-align:center;margin:5px 0 25px;">معلومات الحساب 👤</h2>'+
-        '<p><b>اسم المستخدم:</b><br>'+username+'</p>'+
-        '<p><b>البريد الإلكتروني:</b><br>'+email+'</p>'+
-        '<p><b>كلمة المرور:</b><br>'+password+'</p>'+
-        '</div>';
+        <div class="accountAvatar">👤</div>
+        <h2>معلومات الحساب</h2>
+        <p class="accountSub">بيانات حسابك</p>
+
+        <div class="accountRow">
+          <span>👤 اسم المستخدم</span>
+          <strong>${username}</strong>
+        </div>
+
+        <div class="accountRow">
+          <span>✉️ البريد الإلكتروني</span>
+          <strong dir="ltr">${email}</strong>
+        </div>
+
+        <div class="accountRow">
+          <span>🔐 كلمة المرور</span>
+          <div class="passwordBox">
+            <input id="accountPassword" type="password" value="${password}" readonly>
+            <button type="button" id="passwordEye" onclick="toggleAccountPassword()">👁️</button>
+          </div>
+        </div>
+      </div>
+    `;
 
     document.body.appendChild(modal);
 }
 
+function toggleAccountPassword(){
+    const input=document.getElementById("accountPassword");
+    const eye=document.getElementById("passwordEye");
+    if(!input) return;
+
+    if(input.type==="password"){
+        input.type="text";
+        eye.textContent="🙈";
+    }else{
+        input.type="password";
+        eye.textContent="👁️";
+    }
+}
 document.addEventListener("DOMContentLoaded",updateAccountUI);
 </script>
 
