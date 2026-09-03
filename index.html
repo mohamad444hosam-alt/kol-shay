@@ -790,8 +790,10 @@ body{
     <div class="headerActions">
 
         <div class="accountButtons">
-            <button class="loginBtn" onclick="openLogin()">Login</button>
-            <button class="signupBtn" onclick="openSignup()">Sign Up</button>
+            <div id="accountArea">
+                <button class="loginBtn" onclick="openLogin()">Login</button>
+                <button class="signupBtn" onclick="openSignup()">Sign Up</button>
+            </div>
         </div>
 
         <div class="menuArea">
@@ -1100,7 +1102,8 @@ function login(){
   localStorage.setItem("loggedIn","true");
   localStorage.setItem("userEmail",email);
   localStorage.setItem("username",user.username);
-  message.textContent="تم تسجيل الدخول بنجاح ✅";
+  updateAccountUI();
+  closeLogin();
 }
 </script>
 <script>
@@ -1827,6 +1830,61 @@ function closeMoreMenu(){
 
     </div>
 </div>
+
+
+
+<script>
+function updateAccountUI(){
+    const area=document.getElementById("accountArea");
+    if(!area) return;
+
+    if(localStorage.getItem("loggedIn")==="true"){
+        const username=localStorage.getItem("username") || "حسابي";
+        area.innerHTML=
+            '<button class="loginBtn" onclick="openAccountInfo()">👤 '+username+'</button>'+
+            '<button class="signupBtn" onclick="logout()">تسجيل الخروج</button>';
+    }else{
+        area.innerHTML=
+            '<button class="loginBtn" onclick="openLogin()">Login</button>'+
+            '<button class="signupBtn" onclick="openSignup()">Sign Up</button>';
+    }
+}
+
+function logout(){
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("username");
+    updateAccountUI();
+}
+
+function openAccountInfo(){
+    const username=localStorage.getItem("username") || "";
+    const email=localStorage.getItem("userEmail") || "";
+    const users=JSON.parse(localStorage.getItem("users") || "[]");
+    const user=users.find(u => u.email === email);
+    const password=user ? user.password : "";
+
+    const old=document.getElementById("accountInfoModal");
+    if(old) old.remove();
+
+    const modal=document.createElement("div");
+    modal.id="accountInfoModal";
+    modal.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:1000001;";
+
+    modal.innerHTML=
+        '<div style="width:min(360px,90vw);background:white;border-radius:22px;padding:24px;text-align:right;direction:rtl;">'+
+        '<button onclick="document.getElementById(\'accountInfoModal\').remove()" style="float:left;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:18px;">✕</button>'+
+        '<h2 style="text-align:center;margin:5px 0 25px;">معلومات الحساب 👤</h2>'+
+        '<p><b>اسم المستخدم:</b><br>'+username+'</p>'+
+        '<p><b>البريد الإلكتروني:</b><br>'+email+'</p>'+
+        '<p><b>كلمة المرور:</b><br>'+password+'</p>'+
+        '</div>';
+
+    document.body.appendChild(modal);
+}
+
+document.addEventListener("DOMContentLoaded",updateAccountUI);
+</script>
 
 </body>
 </html>
