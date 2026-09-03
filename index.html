@@ -897,6 +897,252 @@ body{
     cursor:pointer;
 }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style id="newHomeAnimationStyle">
+#home.newHome{
+    font-family:'Cairo',sans-serif;
+    position:relative;
+    overflow:hidden;
+    padding:0;
+    margin:0;
+    background:linear-gradient(135deg,#071b2b,#123b4d 48%,#07151f);
+    border-radius:28px;
+    box-shadow:0 18px 55px rgba(0,0,0,.22);
+}
+.newHome .homeIntro{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    padding:34px 18px 20px;
+    color:#fff;
+}
+.newHome .homeIntro h2{
+    margin:0 0 5px;
+    font-size:clamp(28px,7vw,48px);
+    font-weight:800;
+    letter-spacing:-1px;
+}
+.newHome .homeIntro p{
+    margin:0;
+    font-size:15px;
+    opacity:.82;
+}
+.syriaShow{
+    position:relative;
+    min-height:430px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    perspective:900px;
+}
+.syriaGlow{
+    position:absolute;
+    width:240px;height:240px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.20),transparent 68%);
+    filter:blur(8px);
+    animation:glowPulse 5s ease-in-out infinite;
+}
+.landmark{
+    position:absolute;
+    width:min(78vw,430px);
+    height:300px;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 20px 55px rgba(0,0,0,.38);
+    opacity:0;
+    transform:translateY(35px) scale(.92);
+    animation:landmarkFlow 36s infinite;
+    border:1px solid rgba(255,255,255,.22);
+}
+.landmark img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+}
+.landmark:after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.72),transparent 55%);
+}
+.landmark span{
+    position:absolute;
+    z-index:2;
+    bottom:18px;
+    right:18px;
+    color:#fff;
+    font-size:22px;
+    font-weight:800;
+    text-shadow:0 2px 12px #000;
+}
+.landmark:nth-of-type(2){animation-delay:6s}
+.landmark:nth-of-type(3){animation-delay:12s}
+.landmark:nth-of-type(4){animation-delay:18s}
+.landmark:nth-of-type(5){animation-delay:24s}
+@keyframes landmarkFlow{
+    0%,2%{opacity:0;transform:translateY(35px) scale(.92)}
+    4%,14%{opacity:1;transform:translateY(0) scale(1)}
+    16%,100%{opacity:0;transform:translateY(-25px) scale(1.04)}
+}
+@keyframes glowPulse{
+    0%,100%{transform:scale(.9);opacity:.55}
+    50%{transform:scale(1.15);opacity:1}
+}
+.homeFinal{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    pointer-events:none;
+    animation:finalText 36s infinite;
+    opacity:0;
+}
+.homeFinal div{
+    color:#fff;
+    font-weight:800;
+    font-size:clamp(25px,7vw,42px);
+    text-shadow:0 5px 25px #000;
+}
+.homeFinal small{
+    display:block;
+    margin-top:8px;
+    font-size:15px;
+    font-weight:600;
+    opacity:.9;
+}
+@keyframes finalText{
+    0%,82%{opacity:0;transform:scale(.94)}
+    85%,95%{opacity:1;transform:scale(1)}
+    98%{opacity:.75;transform:scale(1.01)}
+    100%{opacity:0;transform:scale(1.04)}
+}
+.homeActions{
+    position:relative;
+    z-index:6;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    padding:8px 18px 30px;
+}
+.homeActionBtn{
+    border:0;
+    border-radius:16px;
+    padding:13px 19px;
+    font-family:inherit;
+    font-weight:800;
+    font-size:15px;
+    cursor:pointer;
+    background:rgba(255,255,255,.95);
+    color:#123447;
+    box-shadow:0 8px 22px rgba(0,0,0,.2);
+}
+.homeActionBtn:hover{transform:translateY(-2px)}
+.homeCredits{
+    position:relative;
+    z-index:6;
+    text-align:center;
+    color:rgba(255,255,255,.55);
+    font-size:10px;
+    padding:0 15px 13px;
+}
+.homeModal{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:rgba(0,0,0,.62);
+    backdrop-filter:blur(5px);
+}
+.homeModal.show{display:flex}
+.homeModalCard{
+    width:min(92vw,430px);
+    background:#fff;
+    color:#17212b;
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+    text-align:center;
+    font-family:'Cairo',sans-serif;
+}
+.homeModalCard h3{margin:0 0 12px;font-size:24px}
+.homeClose{
+    float:left;
+    border:0;
+    background:#f0f2f4;
+    border-radius:50%;
+    width:34px;height:34px;
+    cursor:pointer;
+    font-size:20px;
+}
+.supportLinks{
+    display:grid;
+    gap:10px;
+    margin-top:16px;
+}
+.supportLinks a{
+    display:block;
+    text-decoration:none;
+    padding:13px;
+    border-radius:14px;
+    background:#f2f6f8;
+    color:#123447;
+    font-weight:800;
+}
+.ratingStars{
+    direction:rtl;
+    display:flex;
+    justify-content:center;
+    gap:5px;
+    margin:18px 0;
+}
+.ratingStars button{
+    border:0;
+    background:none;
+    font-size:42px;
+    cursor:pointer;
+    filter:grayscale(1);
+    opacity:.45;
+    transition:.15s;
+}
+.ratingStars button:hover,
+.ratingStars button.active{
+    filter:none;
+    opacity:1;
+    transform:scale(1.08);
+}
+.ratingThanks{display:none;font-weight:800;color:#245b43}
+@media(max-width:600px){
+    .syriaShow{min-height:350px}
+    .landmark{height:245px}
+    .landmark span{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+    .landmark,.homeFinal,.syriaGlow{animation:none}
+    .landmark:first-of-type{opacity:1;transform:none}
+    .homeFinal{opacity:0}
+}
+</style>
+<style id="syriaFinalStyle">
+.homeFinal{
+    gap:18px;
+    flex-direction:column;
+}
+.homeFinal img{
+    width:min(42vw,220px);
+    max-height:170px;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 20px rgba(0,0,0,.35));
+}
+</style>
 </head>
 
 <body>
@@ -928,9 +1174,57 @@ body{
 
 </header>
 
-<section class="hero" id="home">
-<h2>أهلاً بك في كل شيء 👋</h2>
-<p>مطور الموقع محمد حسام الدين</p>
+<section class="hero newHome" id="home">
+    <div class="homeIntro">
+        <h2>أهلاً بكم في كل شيء ✨</h2>
+        <p>مطور الموقع محمد حسام الدين</p>
+    </div>
+
+    <div class="syriaShow">
+        <div class="syriaGlow"></div>
+
+        <div class="landmark">
+            <img src="damascus-2025.jpg" alt="دمشق - لقطة حديثة">
+            <span>دمشق 🇸🇾</span>
+        </div>
+
+        <div class="landmark">
+            <img src="hama-2025.jpg" alt="حماة - معلم حديث">
+            <span>حماة 💚</span>
+        </div>
+
+        <div class="landmark">
+            <img src="homs-2025.jpg" alt="حمص - الساعة الجديدة">
+            <span>حمص 🕰️</span>
+        </div>
+
+        <div class="landmark">
+            <img src="aleppo-2025.jpg" alt="حلب - ساحة الجامعة">
+            <span>حلب 🏛️</span>
+        </div>
+
+        <div class="landmark">
+            <img src="latakia-2025.jpg" alt="اللاذقية - شاطئ فشيفش">
+            <span>اللاذقية 🌊</span>
+        </div>
+
+        <div class="homeFinal">
+            <img src="syria-map.svg" alt="خريطة سوريا">
+            <div>
+                كل شيء تحتاجه<br>في موقع واحد ✨
+                <small>من سوريا... إلى كل شيء</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="homeActions">
+        <button class="homeActionBtn" onclick="openSupportModal()">🆘 تواصل مع فريق الدعم</button>
+        <button class="homeActionBtn" onclick="openSiteRating()">⭐ قيّم موقعنا</button>
+    </div>
+
+    <div class="homeCredits">
+        صور حديثة ومعالم سورية من Wikimedia Commons.
+    </div>
 </section>
 
 
@@ -2060,5 +2354,69 @@ function toggleAccountPassword(){
 document.addEventListener("DOMContentLoaded",updateAccountUI);
 </script>
 
+
+<div class="homeModal" id="supportModal" onclick="closeHomeModal(event,this)">
+  <div class="homeModalCard" onclick="event.stopPropagation()">
+    <button class="homeClose" onclick="closeHomeModal(null,document.getElementById('supportModal'))">×</button>
+    <h3>🆘 تواصل مع فريق الدعم</h3>
+    <p>نحن هنا لمساعدتك ❤️</p>
+    <div class="supportLinks" id="supportLinks"></div>
+  </div>
+</div>
+
+<div class="homeModal" id="ratingModal" onclick="closeHomeModal(event,this)">
+  <div class="homeModalCard" onclick="event.stopPropagation()">
+    <button class="homeClose" onclick="closeHomeModal(null,document.getElementById('ratingModal'))">×</button>
+    <h3>⭐ قيّم موقعنا</h3>
+    <p>شكراً لتجربتكم موقعنا ❤️</p>
+    <div class="ratingStars" id="siteRatingStars">
+      <button onclick="chooseSiteRating(5)">★</button>
+      <button onclick="chooseSiteRating(4)">★</button>
+      <button onclick="chooseSiteRating(3)">★</button>
+      <button onclick="chooseSiteRating(2)">★</button>
+      <button onclick="chooseSiteRating(1)">★</button>
+    </div>
+    <div class="ratingThanks" id="ratingThanks">تم تسجيل تقييمك، شكراً لك! 🌟</div>
+  </div>
+</div>
+
+<script>
+function openSupportModal(){
+    const box=document.getElementById("supportLinks");
+    if(!box) return;
+    const links=[...document.querySelectorAll('a[href]')].filter(a=>{
+        const h=(a.getAttribute("href")||"").toLowerCase();
+        return h.startsWith("https://wa.me/") || h.startsWith("http://wa.me/") ||
+               h.startsWith("https://api.whatsapp.com/") || h.startsWith("mailto:");
+    });
+    const unique=[];
+    links.forEach(a=>{
+        const href=a.getAttribute("href");
+        if(!unique.includes(href)) unique.push(href);
+    });
+    box.innerHTML=unique.length
+      ? unique.slice(0,4).map(h=>{
+          const wa=h.toLowerCase().includes("whatsapp") || h.toLowerCase().includes("wa.me");
+          return '<a href="'+h+'" target="_blank" rel="noopener">'+(wa?'📱 واتساب':'📧 البريد الإلكتروني')+'</a>';
+        }).join("")
+      : '<p>سيتم إضافة وسائل التواصل هنا قريباً.</p>';
+    document.getElementById("supportModal").classList.add("show");
+}
+function openSiteRating(){
+    document.getElementById("ratingModal").classList.add("show");
+    document.getElementById("ratingThanks").style.display="none";
+    document.querySelectorAll("#siteRatingStars button").forEach(b=>b.classList.remove("active"));
+}
+function chooseSiteRating(n){
+    document.querySelectorAll("#siteRatingStars button").forEach((b,i)=>{
+        b.classList.toggle("active",5-i<=n);
+    });
+    localStorage.setItem("siteRating",String(n));
+    document.getElementById("ratingThanks").style.display="block";
+}
+function closeHomeModal(e,el){
+    if(!e || e.target===el) el.classList.remove("show");
+}
+</script>
 </body>
 </html>
