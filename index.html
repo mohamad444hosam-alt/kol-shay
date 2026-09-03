@@ -943,7 +943,7 @@ body{
         oninput="searchProducts()"
     >
 </div>
-\n<section class="products" id="products">
+\n<section class="products" id="electronicsSection">
 
 <h2>📱 الإلكترونيات</h2>
 
@@ -999,16 +999,20 @@ body{
 
 </div>
 
-<h2>👕 الملابس</h2>
-<div class="grid">
-<p>لا توجد منتجات حاليًا.</p>
-</div>
+</section>
 
-<h2>💄 المكياج والعطور</h2>
-<div class="grid">
-<p>لا توجد منتجات حاليًا.</p>
-</div>
+<section class="products" id="clothesSection" style="display:none;">
+    <h2>👕 الملابس</h2>
+    <div class="grid">
+        <p>لا توجد منتجات حاليًا.</p>
+    </div>
+</section>
 
+<section class="products" id="beautySection" style="display:none;">
+    <h2>💄 المكياج والعطور</h2>
+    <div class="grid">
+        <p>لا توجد منتجات حاليًا.</p>
+    </div>
 </section>
 
 <footer>
@@ -1764,31 +1768,45 @@ function toggleMenu(){
 
 <div class="mobileBottomNav">
 
-    <button onclick="location.href='#home'">
+    <button onclick="showSection('home')">
         <span>🏠</span>
         <small>الرئيسية</small>
     </button>
 
-    <button onclick="focusSearch()">
-        <span>🔎</span>
-        <small>البحث</small>
+    <button onclick="showSection('electronics')">
+        <span>📱</span>
+        <small>الإلكترونيات</small>
     </button>
 
-    <button onclick="location.href='#products'">
-        <span>🛍️</span>
-        <small>المنتجات</small>
+    <button onclick="showSection('clothes')">
+        <span>👕</span>
+        <small>الملابس</small>
     </button>
 
-
-
-    <button onclick="openMoreMenu()">
-        <span>☰</span>
-        <small>المزيد</small>
+    <button onclick="showSection('beauty')">
+        <span>💄</span>
+        <small>مكياج وعطور</small>
     </button>
 
 </div>
 
 <script>
+function showSection(section){
+
+    const home = document.getElementById("home");
+    const products = document.getElementById("products");
+    const electronics = document.getElementById("electronicsSection");
+    const clothes = document.getElementById("clothesSection");
+    const beauty = document.getElementById("beautySection");
+
+    if(home) home.style.display = section === "home" ? "" : "none";
+    if(electronics) electronics.style.display = section === "electronics" ? "" : "none";
+    if(clothes) clothes.style.display = section === "clothes" ? "" : "none";
+    if(beauty) beauty.style.display = section === "beauty" ? "" : "none";
+
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
 function focusSearch(){
     const search=document.getElementById("searchInput");
 
